@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace GeoJSON\FeatureTypes;
+
 enum FeatureTypesEnum: string
 {
     case POINT = 'Point';
