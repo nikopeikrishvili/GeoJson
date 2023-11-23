@@ -1,0 +1,4 @@
+suites:
+  default:
+    namespace: GeoJSON
+    psr4_prefix: GeoJSON
