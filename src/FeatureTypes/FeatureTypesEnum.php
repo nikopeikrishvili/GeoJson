@@ -12,4 +12,9 @@ enum FeatureTypesEnum: string
     case MULTI_POLYGON = 'MultiPolygon';
     case LINE_STRING = 'LineString';
     case MULTI_LINE_STRING = 'MultiLineString';
+
+    public static function values(): array
+    {
+        return array_column(self::cases(), 'value');
+    }
 }

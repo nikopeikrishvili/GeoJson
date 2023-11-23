@@ -8,4 +8,5 @@ namespace GeoJSON\FeatureTypes;
 class Polygon extends FeatureTypeAbstract
 {
     protected FeatureTypesEnum $type = FeatureTypesEnum::POLYGON;
+
 }

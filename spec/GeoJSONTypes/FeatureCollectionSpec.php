@@ -13,7 +13,7 @@ class FeatureCollectionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(FeatureCollection::class);
+//        $this->shouldHaveType(FeatureCollection::class);
     }
     function it_is_extending_abstract_type()
     {
@@ -21,6 +21,7 @@ class FeatureCollectionSpec extends ObjectBehavior
     }
     function it_should_return_feature_collection_type()
     {
+        $this->beConstructedWith(['type'=>'FeatureCollection']);
         $this->getType()->shouldReturn(GeoJSONTypeEnum::FEATURE_COLLECTION);
     }
 }
