@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GeoJSON\FeatureTypes;
 
-class MultiPoint implements FeatureInterface
+class MultiPoint extends FeatureTypeAbstract
 {
+    protected FeatureTypesEnum $type = FeatureTypesEnum::MULTI_POINT;
 }
