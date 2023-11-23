@@ -1,4 +1,5 @@
 <?php
+
 namespace GeoJSON\GeoJSONTypes;
 
 interface GeoJSONTypeInterface

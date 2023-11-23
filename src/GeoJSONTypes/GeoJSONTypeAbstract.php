@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace GeoJSON\GeoJSONTypes;
 
 abstract class GeoJSONTypeAbstract implements GeoJSONTypeInterface

@@ -1,5 +1,7 @@
 <?php
+
 namespace GeoJSON\GeoJSONTypes;
+
 enum GeoJSONTypeEnum: string
 {
     case FEATURE = 'Feature';
