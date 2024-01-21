@@ -37,4 +37,9 @@ abstract class FeatureTypeAbstract implements FeatureInterface
 
     abstract public function validate(): void;
 
+    public function getCoordinates(): array
+    {
+        return $this->coordinates;
+    }
+
 }

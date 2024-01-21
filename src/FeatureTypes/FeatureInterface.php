@@ -7,4 +7,6 @@ interface FeatureInterface
     public function getType(): FeatureTypesEnum;
 
     public function validate(): void;
+
+    public function getCoordinates(): array;
 }
