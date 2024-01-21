@@ -7,7 +7,7 @@ namespace GeoJSON\FeatureTypes;
 use GeoJSON\Exceptions\InvalidFeatureTypeException;
 use GeoJSON\Exceptions\MissingFieldException;
 
-class FeatureTypeAbstract implements FeatureInterface
+abstract class FeatureTypeAbstract implements FeatureInterface
 {
     protected FeatureTypesEnum $type;
     protected array $coordinates = [];
@@ -25,10 +25,16 @@ class FeatureTypeAbstract implements FeatureInterface
             throw  new MissingFieldException('Coordinates field is missing on feature type');
         }
         $this->coordinates = $geojson['coordinates'];
+        $this->validate();
     }
 
     public function getType(): FeatureTypesEnum
     {
         return $this->type;
     }
+
+
+
+    abstract public function validate(): void;
+
 }

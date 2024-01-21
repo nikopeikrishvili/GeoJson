@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace GeoJSON\GeoJSONTypes;
 
 use GeoJSON\Exceptions\FeatureTypeIsNotSupported;
+use GeoJSON\Exceptions\InvalidFeatureTypeException;
 use GeoJSON\Exceptions\InvalidGeoJSONTypeException;
 use GeoJSON\Exceptions\MissingFieldException;
 use GeoJSON\FeatureTypes\FeatureInterface;
 use GeoJSON\FeatureTypes\FeatureTypesEnum;
+use GeoJSON\FeatureTypes\FeatureTypesFactory;
 
 class Feature extends GeoJSONTypeAbstract
 {
@@ -20,6 +22,7 @@ class Feature extends GeoJSONTypeAbstract
      * @throws InvalidGeoJSONTypeException
      * @throws MissingFieldException
      * @throws FeatureTypeIsNotSupported
+     * @throws InvalidFeatureTypeException
      */
     public function __construct(array $geojson)
     {
@@ -37,7 +40,24 @@ class Feature extends GeoJSONTypeAbstract
             throw new FeatureTypeIsNotSupported('Feature type '.$geojson['geometry']['type'].' is not supported, supported types : '.implode(',',
                     FeatureTypesEnum::values()));
         }
-        $featureTypeClass = 'GeoJson\FeatureTypes\\'.FeatureTypesEnum::from($geojson['geometry']['type'])->value;
-        $this->geometry = new $featureTypeClass;
+       $this->geometry = FeatureTypesFactory::createFeatureType(FeatureTypesEnum::from($geojson['geometry']['type']),
+            $geojson['geometry']);
     }
+
+    public function getType(): GeoJSONTypeEnum
+    {
+        return $this->type;
+    }
+
+    public function getProperties(): array
+    {
+        return $this->properties;
+    }
+
+    public function getGeometry(): FeatureInterface
+    {
+        return $this->geometry;
+    }
+
+
 }

@@ -30,7 +30,7 @@ final class GeoJSON
     {
         $geojson = $this->determineAndReturnGeoJSON($data);
         $this->geoJsonTypes($geojson);
-
+        $this->featureTypes($geojson);
         if (!$this->assigned) {
             throw new Exception('GeoJSON type is not supported, supported Types'.implode(',',
                     GeoJSONTypeEnum::values()).','.implode(',', FeatureTypesEnum::values()));
@@ -96,6 +96,10 @@ final class GeoJSON
     }
 
     /**
+     * @param  array  $geojson
+     * @return void
+     * @throws Exceptions\FeatureTypeIsNotSupported
+     * @throws Exceptions\MissingFieldException
      * @throws InvalidGeoJSONTypeException
      */
     private function geoJsonTypes(array $geojson): void
@@ -123,6 +127,10 @@ final class GeoJSON
     }
 
     /**
+     * @param  array  $geojson
+     * @return void
+     * @throws Exceptions\FeatureTypeIsNotSupported
+     * @throws Exceptions\MissingFieldException
      * @throws InvalidGeoJSONTypeException
      */
     private function featureTypes(array $geojson): void

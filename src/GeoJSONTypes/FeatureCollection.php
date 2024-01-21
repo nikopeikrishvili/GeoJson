@@ -11,14 +11,24 @@ use GeoJSON\Exceptions\MissingFieldException;
 final class FeatureCollection extends GeoJSONTypeAbstract
 {
     protected GeoJSONTypeEnum $type = GeoJSONTypeEnum::FEATURE_COLLECTION;
+    /**
+     * @var Feature[] $features
+     */
     protected array $features = [];
 
     /**
+     * @param  array  $data
+     * @throws FeatureTypeIsNotSupported
      * @throws InvalidGeoJSONTypeException
+     * @throws MissingFieldException
      */
     public function __construct(array $data)
     {
         $this->checkType($data);
+        if(!key_exists('features', $data)){
+            throw new MissingFieldException('Features field is missing from features collection');
+        }
+        $this->setFeatures($data['features']);
     }
 
     /**
@@ -43,5 +53,13 @@ final class FeatureCollection extends GeoJSONTypeAbstract
         foreach ($features as $feature) {
             $this->addFeature($feature);
         }
+    }
+
+    /**
+     * @return Feature[]
+     */
+    public function getFeatures(): array
+    {
+        return $this->features;
     }
 }
