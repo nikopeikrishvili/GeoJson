@@ -92,7 +92,7 @@ final class GeoJSON
      */
     private function fromObject(stdClass $geojson): array
     {
-        return $this->fromArray((array) $geojson);
+        return $this->fromArray(json_decode(json_encode($geojson), true));
     }
 
     /**
