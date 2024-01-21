@@ -51,7 +51,6 @@ final class GeoJSON
             'string' => $this->fromText($data),
             'array' => $this->fromArray($data),
             'object' => $this->fromObject($data),
-            default => throw new Exception('Something went wrong'),
         };
     }
 
@@ -63,6 +62,9 @@ final class GeoJSON
      */
     private function fromText(string $geojson): array
     {
+        /**
+         * @var array $object
+         */
         $object = json_decode($geojson, true);
         return $this->fromArray($object);
     }
@@ -92,7 +94,18 @@ final class GeoJSON
      */
     private function fromObject(stdClass $geojson): array
     {
-        return $this->fromArray(json_decode(json_encode($geojson), true));
+        $jsonString = json_encode($geojson);
+        if(!is_string($jsonString)){
+            throw new InvalidGeoJSONInputException('Given GeoJSON is not valid');
+        }
+        /**
+         * @var array $data
+         */
+        $data = json_decode($jsonString, true);
+        if(!is_array($data)){
+            throw new InvalidGeoJSONInputException('Given GeoJSON is not valid');
+        }
+        return $this->fromArray($data);
     }
 
     /**

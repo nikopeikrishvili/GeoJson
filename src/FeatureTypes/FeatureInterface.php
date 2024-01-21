@@ -8,5 +8,8 @@ interface FeatureInterface
 
     public function validate(): void;
 
+    /**
+     * @return array<int,array>
+     */
     public function getCoordinates(): array;
 }

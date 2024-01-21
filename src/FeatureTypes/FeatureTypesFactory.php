@@ -14,7 +14,6 @@ class FeatureTypesFactory
      * @param  FeatureTypesEnum  $featureType
      * @param  array  $featureTypeData
      * @return FeatureInterface
-     * @throws FeatureTypeIsNotSupported
      * @throws InvalidFeatureTypeException
      * @throws MissingFieldException
      */
@@ -27,7 +26,6 @@ class FeatureTypesFactory
             FeatureTypesEnum::MULTI_POLYGON => new MultiPolygon($featureTypeData),
             FeatureTypesEnum::LINE_STRING => new LineString($featureTypeData),
             FeatureTypesEnum::MULTI_LINE_STRING => new MultiLineString($featureTypeData),
-            default => throw new FeatureTypeIsNotSupported('Feature type does not have implementation'),
         };
     }
 }

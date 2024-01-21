@@ -4,3 +4,5 @@ composer.lock
 test.php
 drafts
 .phpunit.result.cache
+.phpunit.cache
+coverage-reports
