@@ -2,7 +2,7 @@
   "name": "nikopeikrishvili/geojson",
   "description": "description",
   "minimum-stability": "stable",
-  "license": "proprietary",
+  "license": "GPL-3.0-or-later",
   "authors": [
     {
       "name": "Niko Peikrishvili",
