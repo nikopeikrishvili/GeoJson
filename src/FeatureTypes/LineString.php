@@ -18,8 +18,5 @@ final class LineString extends FeatureTypeAbstract
         if(count($this->coordinates) < 2) {
             throw new InvalidFeatureException('LineString must have at least 2 coordinates');
         }
-        if($this->coordinates[0] === $this->coordinates[1]){
-            throw new InvalidFeatureException('LineString must have at least 2 different coordinates');
-        }
     }
 }

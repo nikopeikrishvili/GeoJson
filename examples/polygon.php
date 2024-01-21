@@ -4,7 +4,7 @@ use GeoJSON\GeoJSON;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$polygon = [
+$data = [
     'type' => 'Feature',
     'properties' => [],
     'geometry' => [
@@ -20,7 +20,7 @@ $polygon = [
         'type' => 'Polygon'
     ]
 ];
-$geoJson = new GeoJSON($polygon);
+$geoJson = new GeoJSON($data);
 // or
 // $geojson = new GeoJson('some_geojson_file.json');
 

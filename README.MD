@@ -4,4 +4,9 @@
 
 ### Usage
 
-[Polygon](examples/polygon.php) 
+[Polygon](examples/polygon.php) - Polygon Feature \
+[Point](examples/point.php) - Point Feature \
+[MultiPolygon](examples/multipolygon.php) - MultiPolygon Feature \
+[MultiPoint](examples/multipoint.php) - MultiPoint Feature \
+[LineString](examples/linestring.php) - LineString Feature \
+[MultiLineString](examples/multilinestring.php) - MultiLineString Feature 

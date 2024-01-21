@@ -20,14 +20,6 @@ class LineStringTest extends TestCase
         new LineString($data);
     }
 
-    public function testLineStringMustHaveAtLeastTwoDifferentCoordinates(): void
-    {
-        $this->expectException(InvalidFeatureException::class);
-        $this->expectExceptionMessage('LineString must have at least 2 different coordinates');
-        $data = $this->getLineStringDataArray();
-        $data['coordinates'][1] = $data['coordinates'][0];
-        new LineString($data);
-    }
     public function testValidLineString(): void
     {
         $data = $this->getLineStringDataArray();
