@@ -13,7 +13,7 @@ Work in progress ...
 ### GeoJson as Object
 You can use this library to validate GeoJson to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946) standard
 
-Currently, it supports following GeoJson types:
+Currently, it supports following GeoJson types: \
 [Polygon](examples/polygon.php) - Polygon Feature \
 [Point](examples/point.php) - Point Feature \
 [MultiPolygon](examples/multipolygon.php) - MultiPolygon Feature \
