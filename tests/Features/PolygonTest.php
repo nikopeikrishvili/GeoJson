@@ -12,6 +12,7 @@ use GeoJSON\GeoJSON;
 use GeoJSON\GeoJSONTypes\FeatureCollection;
 use GeoJSON\GeoJSONTypes\GeoJSONTypeEnum;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 class PolygonTest extends TestCase
 {
@@ -50,7 +51,7 @@ class PolygonTest extends TestCase
     public function testPolygonFeatureEmptyProperties(): void
     {
         $geojson = new GeoJSON($this->getPolygonGeoJson());
-        $this->assertCount(0, $geojson->getFeatureCollection()->getFeatures()[0]->getProperties());
+        $this->assertInstanceOf(StdClass::class, $geojson->getFeatureCollection()->getFeatures()[0]->getProperties());
     }
     /**
      * @throws InvalidGeoJSONTypeException
@@ -62,7 +63,10 @@ class PolygonTest extends TestCase
         $data = $this->getPolygonGeoJson();
         $data['properties'] = ['foo' => 'bar', 'bar' => 'foo'];
         $geojson = new GeoJSON($data);
-        $this->assertCount(2, $geojson->getFeatureCollection()->getFeatures()[0]->getProperties());
+        $this->assertInstanceOf(StdClass::class, $geojson->getFeatureCollection()->getFeatures()[0]->getProperties());
+
+        $this->assertSame('bar', $geojson->getFeatureCollection()->getFeatures()[0]->getProperties()->foo);
+        $this->assertSame('foo', $geojson->getFeatureCollection()->getFeatures()[0]->getProperties()->bar);
     }
     public function testPolygonIsNotValid(): void
     {

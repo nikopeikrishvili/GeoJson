@@ -19,7 +19,7 @@ class MultiPointTest extends TestCase
         $this->expectExceptionMessage('MultiPoint coordinates item must be an array of two numbers');
         $data = $this->getMultiPointDataArray();
         unset($data['coordinates'][0][1]);
-        new MultiPoint($data);
+        new MultiPoint($data['coordinates']);
     }
     public function testMultiPointShouldHaveNumericCoordinates(): void
     {
@@ -27,7 +27,7 @@ class MultiPointTest extends TestCase
         $this->expectExceptionMessage('MultiPoint coordinates item should be numeric');
         $data = $this->getMultiPointDataArray();
         $data['coordinates'][0][1] = 'a';
-        new MultiPoint($data);
+        new MultiPoint($data['coordinates']);
     }
     public function testMultiPointShouldNotHaveMoreThanCoordinates(): void
     {
@@ -36,13 +36,13 @@ class MultiPointTest extends TestCase
         $data = $this->getMultiPointDataArray();
         $data['coordinates'][0][2] = 3;
         $data['coordinates'][0][3] = 4;
-        new MultiPoint($data);
+        new MultiPoint($data['coordinates']);
     }
     public function testMultiPointCanHaveTwoCoordinates(): void
     {
         $data = $this->getMultiPointDataArray();
 
-        $point = new MultiPoint($data);
+        $point = new MultiPoint($data['coordinates']);
         $this->assertEquals(FeatureTypesEnum::MULTI_POINT, $point->getType());
         $this->assertEquals([100.0, 0.0], $point->getCoordinates()[0]);
     }
@@ -50,7 +50,7 @@ class MultiPointTest extends TestCase
     {
         $data = $this->getMultiPointDataArray();
         $data['coordinates'][0][2] = 3;
-        $point = new MultiPoint($data);
+        $point = new MultiPoint($data['coordinates']);
         $this->assertEquals(FeatureTypesEnum::MULTI_POINT, $point->getType());
         $this->assertEquals([100.0, 0.0, 3], $point->getCoordinates()[0]);
     }

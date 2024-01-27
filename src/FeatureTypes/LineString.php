@@ -10,6 +10,11 @@ final class LineString extends FeatureTypeAbstract
 {
     protected FeatureTypesEnum $type = FeatureTypesEnum::LINE_STRING;
 
+    public function __construct(array $coordinates)
+    {
+        parent::__construct($coordinates);
+    }
+
     /**
      * @throws InvalidFeatureException
      */

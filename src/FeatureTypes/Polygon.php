@@ -11,6 +11,14 @@ final class Polygon extends FeatureTypeAbstract
 {
     protected FeatureTypesEnum $type = FeatureTypesEnum::POLYGON;
 
+    public function __construct(array $coordinates)
+    {
+        parent::__construct($coordinates);
+    }
+
+    /**
+     * @throws InvalidFeatureException
+     */
     public function validate(): void
     {
         if($this->coordinates[0][0] !== $this->coordinates[0][count($this->coordinates[0])-1]){

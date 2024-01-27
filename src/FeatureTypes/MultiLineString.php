@@ -10,6 +10,11 @@ final class MultiLineString extends FeatureTypeAbstract
 {
     protected FeatureTypesEnum $type = FeatureTypesEnum::MULTI_LINE_STRING;
 
+    public function __construct(array $coordinates)
+    {
+        parent::__construct($coordinates);
+    }
+
     /**
      * @throws InvalidFeatureException
      */

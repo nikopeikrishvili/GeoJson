@@ -2,6 +2,8 @@
 
 namespace GeoJSON\FeatureTypes;
 
+use GeoJSON\GeoJSON;
+
 interface FeatureInterface
 {
     public function getType(): FeatureTypesEnum;
@@ -12,4 +14,8 @@ interface FeatureInterface
      * @return array<int,array>
      */
     public function getCoordinates(): array;
+
+    public function asArray(): array;
+
+    public function asGeoJson(): GeoJSON;
 }

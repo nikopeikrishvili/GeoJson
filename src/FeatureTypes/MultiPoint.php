@@ -10,6 +10,11 @@ final class MultiPoint extends FeatureTypeAbstract
 {
     protected FeatureTypesEnum $type = FeatureTypesEnum::MULTI_POINT;
 
+    public function __construct(array $coordinates)
+    {
+        parent::__construct($coordinates);
+    }
+
     public function validate(): void
     {
         foreach ($this->coordinates as $coordinate){

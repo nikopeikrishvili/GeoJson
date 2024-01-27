@@ -113,7 +113,7 @@ final class GeoJSON
      * @return void
      * @throws Exceptions\FeatureTypeIsNotSupported
      * @throws Exceptions\MissingFieldException
-     * @throws InvalidGeoJSONTypeException
+     * @throws InvalidGeoJSONTypeException|Exceptions\InvalidFeatureTypeException
      */
     private function geoJsonTypes(array $geojson): void
     {
@@ -144,7 +144,7 @@ final class GeoJSON
      * @return void
      * @throws Exceptions\FeatureTypeIsNotSupported
      * @throws Exceptions\MissingFieldException
-     * @throws InvalidGeoJSONTypeException
+     * @throws InvalidGeoJSONTypeException|Exceptions\InvalidFeatureTypeException
      */
     private function featureTypes(array $geojson): void
     {
@@ -164,5 +164,28 @@ final class GeoJSON
 
             $this->assigned = true;
         }
+    }
+
+    /**
+     * Return GeoJSON as array
+     * @return array
+     */
+    public function asArray(): array
+    {
+        return $this->getFeatureCollection()->asArray();
+    }
+
+    /**
+     * Return GeoJSON as string
+     * @return string
+     * @throws InvalidGeoJSONInputException
+     */
+    public function asString(): string
+    {
+        $json = json_encode($this->asArray());
+        if(!$json){
+            throw new InvalidGeoJSONInputException('Generated GeoJSON is not valid');
+        }
+        return $json;
     }
 }

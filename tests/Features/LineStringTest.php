@@ -17,13 +17,13 @@ class LineStringTest extends TestCase
         $this->expectExceptionMessage('LineString must have at least 2 coordinates');
         $data = $this->getLineStringDataArray();
         unset($data['coordinates'][1]);
-        new LineString($data);
+        new LineString($data['coordinates']);
     }
 
     public function testValidLineString(): void
     {
         $data = $this->getLineStringDataArray();
-        $lineString = new LineString($data);
+        $lineString = new LineString($data['coordinates']);
         $this->assertEquals(FeatureTypesEnum::LINE_STRING, $lineString->getType());
     }
     private function getLineStringDataArray(){

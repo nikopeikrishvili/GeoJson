@@ -41,23 +41,6 @@ class Feature extends GeoJSONTypeAbstract
                     FeatureTypesEnum::values()));
         }
        $this->geometry = FeatureTypesFactory::createFeatureType(FeatureTypesEnum::from($geojson['geometry']['type']),
-            $geojson['geometry']);
+            $geojson['geometry']['coordinates']);
     }
-
-    public function getType(): GeoJSONTypeEnum
-    {
-        return $this->type;
-    }
-
-    public function getProperties(): array
-    {
-        return $this->properties;
-    }
-
-    public function getGeometry(): FeatureInterface
-    {
-        return $this->geometry;
-    }
-
-
 }

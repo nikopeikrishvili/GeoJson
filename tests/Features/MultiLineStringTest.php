@@ -18,12 +18,12 @@ class MultiLineStringTest extends TestCase
         $this->expectExceptionMessage('Every item in MultiLineString must have at least 2 coordinates');
         $data = $this->getMultiLineStringDataArray();
         unset($data['coordinates'][0][1]);
-        new MultiLineString($data);
+        new MultiLineString($data['coordinates']);
     }
     public function testValidLineString(): void
     {
         $data = $this->getMultiLineStringDataArray();
-        $multiLineString = new MultiLineString($data);
+        $multiLineString = new MultiLineString($data['coordinates']);
         $this->assertEquals(FeatureTypesEnum::MULTI_LINE_STRING, $multiLineString->getType());
     }
     private function getMultiLineStringDataArray(){

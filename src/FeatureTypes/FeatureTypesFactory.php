@@ -15,7 +15,6 @@ class FeatureTypesFactory
      * @param  array  $featureTypeData
      * @return FeatureInterface
      * @throws InvalidFeatureTypeException
-     * @throws MissingFieldException
      */
     public static function createFeatureType(FeatureTypesEnum $featureType, array $featureTypeData): FeatureInterface
     {

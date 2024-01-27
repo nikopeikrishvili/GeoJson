@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GeoJSON\GeoJSONTypes;
 
 use GeoJSON\Exceptions\FeatureTypeIsNotSupported;
+use GeoJSON\Exceptions\InvalidFeatureTypeException;
 use GeoJSON\Exceptions\InvalidGeoJSONTypeException;
 use GeoJSON\Exceptions\MissingFieldException;
 
@@ -21,6 +22,7 @@ final class FeatureCollection extends GeoJSONTypeAbstract
      * @throws FeatureTypeIsNotSupported
      * @throws InvalidGeoJSONTypeException
      * @throws MissingFieldException
+     * @throws InvalidFeatureTypeException
      */
     public function __construct(array $data)
     {
@@ -36,7 +38,7 @@ final class FeatureCollection extends GeoJSONTypeAbstract
      * @return void
      * @throws InvalidGeoJSONTypeException
      * @throws FeatureTypeIsNotSupported
-     * @throws MissingFieldException
+     * @throws MissingFieldException|InvalidFeatureTypeException
      */
     public function addFeature(array $feature): void
     {
@@ -47,6 +49,7 @@ final class FeatureCollection extends GeoJSONTypeAbstract
      * @throws InvalidGeoJSONTypeException
      * @throws FeatureTypeIsNotSupported
      * @throws MissingFieldException
+     * @throws InvalidFeatureTypeException
      */
     public function setFeatures(array $features): void
     {
@@ -61,5 +64,17 @@ final class FeatureCollection extends GeoJSONTypeAbstract
     public function getFeatures(): array
     {
         return $this->features;
+    }
+
+    public function asArray(): array
+    {
+        $data =  [
+            'type' => $this->getType(),
+            'features' => [],
+        ];
+        foreach ($this->getFeatures() as $feature) {
+            $data['features'][] = $feature->asArray();
+        }
+        return $data;
     }
 }

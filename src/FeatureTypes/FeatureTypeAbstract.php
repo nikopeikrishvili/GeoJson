@@ -4,27 +4,24 @@ declare(strict_types=1);
 
 namespace GeoJSON\FeatureTypes;
 
-use GeoJSON\Exceptions\InvalidFeatureTypeException;
-use GeoJSON\Exceptions\MissingFieldException;
+use Exception;
+use GeoJSON\Exceptions\GeoJSONTypeIsNotDefined;
+use GeoJSON\Exceptions\InvalidGeoJSONInputException;
+use GeoJSON\Exceptions\InvalidGeoJSONTypeException;
+use GeoJSON\GeoJSON;
+use GeoJSON\GeoJSONTypes\GeoJSONTypeEnum;
 
 abstract class FeatureTypeAbstract implements FeatureInterface
 {
     protected FeatureTypesEnum $type;
     protected array $coordinates = [];
+    protected array $properties = [];
 
     /**
-     * @throws InvalidFeatureTypeException
-     * @throws MissingFieldException
      */
-    public function __construct(array $geojson)
+    public function __construct(array $coordinates)
     {
-        if (FeatureTypesEnum::from($geojson['type']) != $this->getType()) {
-            throw new InvalidFeatureTypeException('Feature type is invalid');
-        }
-        if (!key_exists('coordinates', $geojson)) {
-            throw  new MissingFieldException('Coordinates field is missing on feature type');
-        }
-        $this->coordinates = $geojson['coordinates'];
+        $this->coordinates = $coordinates;
         $this->validate();
     }
 
@@ -42,4 +39,30 @@ abstract class FeatureTypeAbstract implements FeatureInterface
         return $this->coordinates;
     }
 
+    public function asArray(): array
+    {
+        return [
+            'type' => $this->getType()->value,
+            'coordinates' => $this->getCoordinates(),
+        ];
+    }
+
+    /**
+     * @throws InvalidGeoJSONTypeException
+     * @throws InvalidGeoJSONInputException
+     * @throws GeoJSONTypeIsNotDefined
+     */
+    public function asGeoJson(): GeoJSON
+    {
+        return new GeoJSON([
+            'type'=>GeoJSONTypeEnum::FEATURE->value,
+            'geometry'=>$this->asArray(),
+            'properties'=>$this->properties,
+        ]);
+    }
+
+    public function setProperties(array $properties): void
+    {
+        $this->properties = $properties;
+    }
 }

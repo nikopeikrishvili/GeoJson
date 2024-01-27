@@ -10,6 +10,14 @@ final class MultiPolygon extends FeatureTypeAbstract
 {
     protected FeatureTypesEnum $type = FeatureTypesEnum::MULTI_POLYGON;
 
+    public function __construct(array $coordinates)
+    {
+        parent::__construct($coordinates);
+    }
+
+    /**
+     * @throws InvalidFeatureException
+     */
     public function validate(): void
     {
         foreach ($this->coordinates as $coordinate){

@@ -10,6 +10,11 @@ final class Point extends FeatureTypeAbstract
 {
     protected FeatureTypesEnum $type = FeatureTypesEnum::POINT;
 
+    public function __construct(array $coordinates)
+    {
+        parent::__construct($coordinates);
+    }
+
     /**
      * @throws InvalidFeatureException
      */
@@ -23,4 +28,5 @@ final class Point extends FeatureTypeAbstract
             throw new InvalidFeatureException('Point coordinates should be numeric');
         }
     }
+
 }

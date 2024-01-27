@@ -2,14 +2,98 @@
 
 ### Installation
 
+The library is published as a
+[package](https://packagist.org/packages/nikopeikrishvili/geojson) and is installable via
+[Composer](http://getcomposer.org/):
+
 ```bash
 composer require nikopeikrishvili/geojson
 ```
-### Creating GeoJson Object
-
-Work in progress ...
+## Creating GeoJson Object
 
 
+You can create Feature object and extract GeoJson string from it, you need just provide Coordinates, for example :
+### Polygon
+```php
+$feature = new GeoJSON\FeatureTypes\Polygon([/**coordinates array**/]);
+```
+### Multi Polygon
+```php
+$feature = new GeoJSON\FeatureTypes\MultiPolygon([/**coordinates array**/]);
+```
+### Point
+```php
+
+$feature = new GeoJSON\FeatureTypes\Point([/**coordinates array**/]);
+```
+### Multi Point
+```php
+
+$feature = new GeoJSON\FeatureTypes\MultiPoint([/**coordinates array**/]);
+```
+### LineString
+```php
+
+$feature = new GeoJSON\FeatureTypes\LineString([/**coordinates array**/]);
+```
+### MultiLineString
+
+```php
+
+$feature = new GeoJSON\FeatureTypes\MultiLineString([/**coordinates array**/]);
+```
+### Generate GeoJson String
+```php
+$geoJson = $feature->asGeoJson();
+$geoJsonString = $geoJson->asString();
+echo $geoJsonString.PHP_EOL;
+```
+```json
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.04315136683675,
+              29.451187895050822
+            ],
+            [
+              -72.04315136683675,
+              27.849712263460177
+            ],
+            [
+              -68.23275413868745,
+              27.849712263460177
+            ],
+            [
+              -68.23275413868745,
+              29.451187895050822
+            ],
+            [
+              -72.04315136683675,
+              29.451187895050822
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
+
+```
+## Examples :
+[Polygon](examples/create/create-polygon.php) - Create Polygon Feature \
+[Point](examples/create/create-point.php) - Create Point Feature \
+[MultiPolygon](examples/create/create-multipolygon.php) - Create MultiPolygon Feature \
+[MultiPoint](examples/create/create-multipoint.php) - Create MultiPoint Feature \
+[LineString](examples/create/create-linestring.php) - Create LineString Feature \
+[MultiLineString](examples/create/create-multilinestring.php) - Create MultiLineString Feature
 ### GeoJson as Object
 You can use this library to validate GeoJson to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946) standard
 

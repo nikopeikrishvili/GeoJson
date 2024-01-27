@@ -18,7 +18,7 @@ class PointTest extends TestCase
         $this->expectExceptionMessage('Point coordinates must be an array of two numbers');
         $data = $this->getPointDataArray();
         unset($data['coordinates'][1]);
-        new Point($data);
+        new Point($data['coordinates']);
     }
     public function testPointShouldHaveNumericCoordinates(): void
     {
@@ -26,7 +26,7 @@ class PointTest extends TestCase
         $this->expectExceptionMessage('Point coordinates should be numeric');
         $data = $this->getPointDataArray();
         $data['coordinates'][1] = 'a';
-        new Point($data);
+        new Point($data['coordinates']);
     }
     public function testPointShouldNotHaveMoreThanCoordinates(): void
     {
@@ -35,13 +35,13 @@ class PointTest extends TestCase
         $data = $this->getPointDataArray();
         $data['coordinates'][2] = 3;
         $data['coordinates'][3] = 4;
-        new Point($data);
+        new Point($data['coordinates']);
     }
     public function testPointCanHaveTwoCoordinates(): void
     {
         $data = $this->getPointDataArray();
 
-        $point = new Point($data);
+        $point = new Point($data['coordinates']);
         $this->assertEquals(FeatureTypesEnum::POINT, $point->getType());
         $this->assertEquals([1, 2], $point->getCoordinates());
     }
@@ -49,7 +49,7 @@ class PointTest extends TestCase
     {
         $data = $this->getPointDataArray();
         $data['coordinates'][2] = 3;
-        $point = new Point($data);
+        $point = new Point($data['coordinates']);
         $this->assertEquals(FeatureTypesEnum::POINT, $point->getType());
         $this->assertEquals([1, 2, 3], $point->getCoordinates());
     }
