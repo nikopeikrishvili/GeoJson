@@ -6,3 +6,4 @@ drafts
 .phpunit.result.cache
 .phpunit.cache
 coverage-reports
+coverage.clover
